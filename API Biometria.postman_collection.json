@@ -1,0 +1,1620 @@
+{
+	"info": {
+		"_postman_id": "c0b1248c-2e8c-4bdc-99b6-7953c3d08478",
+		"name": "API Biometria",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14588545"
+	},
+	"item": [
+		{
+			"name": "enroll",
+			"item": [
+				{
+					"name": "01 - enroll - OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE EXITO *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Key 'message' value\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"Christian Bale - Postman is now enrolled\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clave}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "uid",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Christian Bale - Postman",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/pi/cbale.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/enroll",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"enroll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02 - enroll - ERROR - uid repetido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE EXITO *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Key 'message' value\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"User id alredy exist or belongs to another demo user\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "uj.ah3JiyohN",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "jarzarello",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "uid",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Christian Bale - Postman",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/pi/cbale.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/enroll",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"enroll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "03 - enroll - ERROR - Sin imagen",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE EXITO *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Key 'message' value\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"no image found\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clave}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "uid",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Christian Bale - Postman",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/enroll",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"enroll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04 - enroll - ERROR - Imagen sin rostro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE EXITO *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Key 'message' value\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"No face found, try a different image\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clave}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "uid",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Paisaje - Postman",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/pi/land.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/enroll",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"enroll"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "01 - users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE users *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"users\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clave}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{URL}}/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "identify",
+			"item": [
+				{
+					"name": "01 - identify - OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE name *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"name\");\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE score *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"score\");\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE method *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"method\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Key 'method' value\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.method).to.eql(\"cosine similarity\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clave}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/pi/cbale.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/identify",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"identify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02 - identify - OK - Usuario no enrolado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE name *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"name\");\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE score *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"score\");\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE method *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"method\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Key 'method' value\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.method).to.eql(\"cosine similarity\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clave}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/pi/nolan.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/identify",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"identify"
+							],
+							"query": [
+								{
+									"key": "image",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "03 - identify - ERROR - Sin imagen",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE message *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Key 'message' value\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"no image found\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clave}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/pi/land.jpg",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/identify",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"identify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04 - identify - ERROR - Imagen sin rostro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE message *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Key 'message' value\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"No face found, try a different image\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clave}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/pi/land.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/identify",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"identify"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "verify",
+			"item": [
+				{
+					"name": "01 - verify - OK - Imagen exacta",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE score *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"score\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Key 'score' value\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.score).to.eql(\"1.0\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clave}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/pi/cbale.jpg"
+								},
+								{
+									"key": "uid",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/verify",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"verify"
+							],
+							"query": [
+								{
+									"key": "image",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02 - verify - OK - Imagen distinta",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE score *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"score\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Key 'score' value\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.score).to.not.eql(\"1.0\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clave}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/pi/nolan.jpg"
+								},
+								{
+									"key": "uid",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/verify",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"verify"
+							],
+							"query": [
+								{
+									"key": "image",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "03 - verify - ERROR - Imagen sin rostro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE score *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Key 'message' value\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"No face found, try a different image\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clave}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/pi/land.jpg"
+								},
+								{
+									"key": "uid",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/verify",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"verify"
+							],
+							"query": [
+								{
+									"key": "image",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04 - verify - ERROR - Sin imagen",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE score *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Key 'message' value\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"no image found\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clave}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/pi/cbale.jpg",
+									"disabled": true
+								},
+								{
+									"key": "uid",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/verify",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"verify"
+							],
+							"query": [
+								{
+									"key": "image",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "05 - verify - ERROR - Sin UID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"//**** STRING Bad Request *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"//**** STRING The browser (or proxy) sent a request that this server could not understand. *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"The browser (or proxy) sent a request that this server could not understand.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clave}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/pi/cbale.jpg"
+								},
+								{
+									"key": "uid",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/verify",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"verify"
+							],
+							"query": [
+								{
+									"key": "image",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "compare",
+			"item": [
+				{
+					"name": "01 - compare - OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE score *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"score\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clave}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image_1",
+									"type": "file",
+									"src": "/D:/pi/cbaleb.jpg"
+								},
+								{
+									"key": "image_2",
+									"type": "file",
+									"src": "/D:/pi/d.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/compare",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"compare"
+							],
+							"query": [
+								{
+									"key": "image",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02 - compare - ERROR - Imagen_1 sin rostro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE message *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Key 'message' value\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"No face found in image_1, try a different image\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clave}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image_1",
+									"type": "file",
+									"src": "/D:/pi/land.jpg"
+								},
+								{
+									"key": "image_2",
+									"type": "file",
+									"src": "/D:/pi/cbale.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/compare",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"compare"
+							],
+							"query": [
+								{
+									"key": "image",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "03 - compare - ERROR - Imagen_2 sin rostro Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE message *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Key 'message' value\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"No face found in image_2, try a different image\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clave}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image_1",
+									"type": "file",
+									"src": "/D:/pi/cbale.jpg"
+								},
+								{
+									"key": "image_2",
+									"type": "file",
+									"src": "/D:/pi/land.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/compare",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"compare"
+							],
+							"query": [
+								{
+									"key": "image",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04 - compare - ERROR - Sin Image_1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE message *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Key 'message' value\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"No image_1 found\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clave}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image_1",
+									"type": "file",
+									"src": "/D:/pi/land.jpg",
+									"disabled": true
+								},
+								{
+									"key": "image_2",
+									"type": "file",
+									"src": "/D:/pi/cbale.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/compare",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"compare"
+							],
+							"query": [
+								{
+									"key": "image",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "05 - compare - ERROR - Sin Image_2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE message *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Key 'message' value\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"No image_2 found\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clave}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image_1",
+									"type": "file",
+									"src": "/D:/pi/cbale.jpg"
+								},
+								{
+									"key": "image_2",
+									"type": "file",
+									"src": "/D:/pi/cbale.jpg",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/compare",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"compare"
+							],
+							"query": [
+								{
+									"key": "image",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "unroll",
+			"item": [
+				{
+					"name": "01 - unroll - OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE DELETED *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"deleted\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Key 'deleted' value\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.deleted).to.eql(\"Christian Bale - Postman:1\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clave}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "uid",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/unroll",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"unroll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02 - unroll - ERROR - UID inexistente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"//**** CLAVE EXITO *****//\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Key 'message' value\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"there is no user with uid 1 for user jarzarello\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clave}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "uid",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/unroll",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"unroll"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{clave}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{usuario}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
